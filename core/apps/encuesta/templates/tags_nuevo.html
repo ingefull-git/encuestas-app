@@ -6,7 +6,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-        <form class="form-horizontal" method="POST" action="{% url 'nuevo-tag' %}">
+        <form class="form-horizontal" method="POST" action="{% url 'encuesta:nuevo-tag' %}">
             {% csrf_token %}
             <div class="modal-body">
                 <Label>Nombre:</Label>

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.aggregates import Count, Sum
 from django.forms import modelformset_factory
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView)
 
@@ -134,7 +135,7 @@ class NuevoTag(CreateView):
     model = Tag
     template_name = 'tags_nuevo.html'
     form_class = TagForm
-    success_url = '/tag/listado/'
+    success_url = reverse_lazy('encuesta:lista-tag')
 
 
 class BorraTag(DeleteView):
