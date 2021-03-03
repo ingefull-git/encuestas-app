@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Nueva Encuesta{% endblock %}
+
+{% block main %}
+<form method="POST">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h3 class="panel-title mt-4 mb-4">Agregar nueva Encuesta</h3>
+            </div>
+            <div class="col-12 col-md-4 text-right mt-4 mb-4">
+                <button type="submit" class="btn btn-info btn-md">Guardar</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-12">
+                <label style="font-weight: 700;">Pregunta</label>
+                {{ form.pregunta }}
+            </div>
+        </div>
+        {{ formset.management_form }}
+        <div class="col-lg-4 mt-2">
+            {% for f in formset %}
+            <label style="font-weight: 700; font-size: 0.8rem">Opción Nro.{{forloop.counter}}</label>
+            {{ f.titulo}}
+            {% endfor %}
+        </div>
+        <div class="container">
+            <div class="row mt-2">
+                <div class="col-6 col-md-3">
+                    <label>Vencimiento</label>
+                    {{form.vence}}
+                </div>
+                <div class="col-6 col-md-3">
+                    <label>Tag</label>
+                    {{form.tag}}
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

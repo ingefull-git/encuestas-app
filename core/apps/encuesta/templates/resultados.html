@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Resultados{% endblock %}
+
+{% block main %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <h3 class="panel-title mt-4 mb-4">Resultados Encuesta</h3>
+        </div>
+        <div class="col-12 col-md-4 text-right mt-4 mb-4">
+            <a type="btn" href="/" class="btn btn-secondary btn-md">Cerrar</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h5>{{object.pregunta}}</h5>
+        </div>
+    </div>
+    <div class="col-6 mt-4">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Opciones</th>
+                    <th>Resultado</th>
+                </tr>
+
+            </thead>
+            <tbody>
+                {% for r in respuestas %}
+                <tr>
+                    <td>{{r.titulo}}</td>
+                    <td>{{r.resultado}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Total</th>
+                    <th>{{total}}</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

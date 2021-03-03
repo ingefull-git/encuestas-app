@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block main %}
+<div class="card  mt-4">
+  <div class="card-header">
+    <h5>APP Encuestas</h5>
+  </div>
+  <div class="card-body">
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="input-group mb-3">
+        <div class="input-group-append">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+        </div>
+        <input type="text" name="username" placeholder="Usuario..." class="form-control">
+      </div>
+      <div class="input-group mb-2">
+        <div class="input-group-append">
+          <span class="input-group-text"><i class="fas fa-key"></i></span>
+        </div>
+        <input type="password" name="password" placeholder="Password..." class="form-control">
+      </div>
+      <div class="text-center">
+        <input class="btn btn-md btn-success" type="submit" value="Ingresar">
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <div class="mt-4">
+      <div class="text-left">
+        No es un usuario? <a href="{% url 'login:register' %}" class="ml-2">Registrarse</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

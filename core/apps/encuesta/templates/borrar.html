@@ -1,0 +1,21 @@
+<div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title">Borrar Encuesta</h1>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form class="form-horizontal" method="POST" action="{% url 'encuesta:borra-pregunta' object.id %}">
+            {% csrf_token %}
+            <div class="modal-body">
+                <Label>Pregunta:</Label>
+                <h5>{{pregunta.pregunta}}</h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-danger">Borrar</button>
+            </div>
+        </form>
+    </div>
+</div>

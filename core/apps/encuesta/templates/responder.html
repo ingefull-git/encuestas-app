@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Responder Encuesta{% endblock %}
+
+{% block main %}
+<form method="POST">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <h3 class="panel-title mt-4 mb-4">Responder Encuesta</h3>
+            </div>
+            <div class="col-12 col-md-4 text-right mt-4 mb-4">
+                <button type="submit" class="btn btn-success btn-md">Guardar</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-lg-12">
+                <label style="font-weight: 700;">Pregunta</label>
+                <span class="form-control" readonly>
+                    <h5>{{ encuesta.pregunta }}</h5>
+                </span>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            {% for op in opciones %}
+            <label style="font-weight: 700; font-size: 0.8rem">Opción Nro.{{forloop.counter}}</label>
+            <span class="form-control" readonly>{{op.titulo}}</span>
+            {% endfor %}
+        </div>
+        <hr>
+        <div class="col-lg-6 mt-4">
+            <label><strong class="text-primary">Seleccione su opcion</strong></label>
+            {{form.opcion}}
+        </div>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Tags{% endblock %}
+
+{% block main %}
+<div class="col-8">
+
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <h3 class="panel-title mb-4 mt-4">TAGS</h3>
+        </div>
+        <div class="col-12 col-md-4 text-right">
+            <a href="#" onclick="modal_generic('{% url 'encuesta:nuevo-tag' %}')"
+               class="btn btn-primary btn-md mt-4">Agregar Tag</a>
+        </div>
+    </div>
+    <div class="col-10 mt-4">
+        <div class="tabla-listado">
+            <table class="table table-lg table-hover tabla-listado">
+            <thead>
+            <tr>
+                <th style="width:35%">Nombre</th>
+                <th>Creado</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for tag in tags %}
+            <tr class="text-center">
+                <td class="text-left">{{ tag.nombre }}</td>
+                <td>{{ tag.creado|date:'d/m/y' }}</td>
+                <td>
+                    <a href="#" onclick="modal_generic('{% url 'encuesta:borra-tag' tag.id %}')"
+                       class="btn btn-danger btn-sm"
+                       role="button" aria-pressed="true"><i class="fas fa-trash-alt"></i>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

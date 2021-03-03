@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Reportes{% endblock %}
+
+{% block main %}
+<div class="container-flex">
+    <form action="" method="GET">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <h3 class="panel-title mb-4 mt-4">Reporte Encuestas</h3>
+            </div>
+            <div class="col-12 col-md-6 text-right">
+                <div class="row">
+                    <div class="col-12 col-md-4 text-left">
+                        <label class="mb-0 mt-2 ">Usuario</label>
+                        <select name="userSel" id="userSel" class="form-control mt-0">
+                            <option value="0" selected>--seleccionar--</option>
+                            {% for usuario in usuarios %}
+                            <option value="{{usuario.id}}">{{usuario}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-4 text-left">
+                        <label class="mb-0 mt-2 ">Tag</label>
+                        <select name="tagSel" id="tagSel" class="form-control mt-0">
+                            <option value="0" selected>--seleccionar--</option>
+                            {% for tag in tags %}
+                            <option value="{{tag.id}}">{{tag}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="buscar mt-4">
+                        <div class="col-12 col-md-4 mt-2 text-left">
+                            <button type="submit" class="btn btn-md btn-info">Buscar</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="container mt-4 pt-4">
+        <div class="tabla-listado">
+            <table class="table table-lg table-hover tabla-listado">
+                <thead>
+                    <tr>
+                        <th style="width:35%">Pregunta</th>
+                        <th>Total</th>
+                        <th>Usuario</th>
+                        <th>Creado</th>
+                        <th>Vence</th>
+                        <th>Tag</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for preg in preguntas %}
+                    <tr class="text-center">
+                        <td class="text-left">{{ preg.pregunta }}</td>
+                        <td>{{ preg.total }}</td>
+                        <td>{% if preg.usuario %} {{preg.usuario}} {% else %} ---- {% endif %}</td>
+                        <td>{{preg.creado|date:'d/m/y'}}</td>
+                        <td>{{ preg.vence|date:'d/m/y' }}</td>
+                        <td>{% if preg.tag %} {{ preg.tag }} {% else %} ---- {% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

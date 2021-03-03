@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block main %}
+<div class="container-flex">
+
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <h3 class="panel-title mb-4 mt-4">Encuestas Disponibles</h3>
+        </div>
+        {% if request.user.username %}
+        <div class="col-12 col-md-4 text-right">
+            <a href="{% url 'encuesta:nueva-pregunta' %}" class="btn btn-primary btn-md mt-4">Agregar Encuesta</a>
+        </div>
+        {% endif %}
+    </div>
+    <div class="container mt-4">
+        <div class="tabla-listado">
+            <table class="table table-lg table-hover">
+                <thead>
+                    <tr>
+                        <th style="width:35%">Pregunta</th>
+                        {% if request.user.username %}
+                        <th>Total</th>
+                        <th>Usuario</th>
+                        <th>Creado</th>
+                        {% else %}
+
+                        {% endif %}
+                        <th>Vence</th>
+                        <th>Tag</th>
+                        <th></th>
+                        {% if request.user.username %}
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        {% else %}
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for preg in preguntas %}
+                    <tr class="text-center">
+                        <td class="text-left">{{ preg.pregunta }}</td>
+                        {% if request.user.username %}
+                        <td>{{ preg.total }}</td>
+                        <td>{% if preg.usuario %} {{preg.usuario}} {% else %} ---- {% endif %}</td>
+                        <td>{{preg.creado|date:'d/m/y'}}</td>
+                        {% else %}
+
+                        {% endif %}
+                        {% if preg.vencida %}
+                        <td class="text-danger font-weight-bold">{{ preg.vence|date:'d/m/y' }}</td>
+                        {% else %}
+                        <td class="text-success font-weight-bold">{{ preg.vence|date:'d/m/y' }}</td>
+                        {% endif %}
+                        <td>{% if preg.tag %} {{ preg.tag }} {% else %} ---- {% endif %}</td>
+                        {% if preg.vencida %}
+                        <td>
+                            <a href="#" class="btn btn-light btn-sm text-dark border-dark" readonly>
+                                <i class="fas fa-spell-check"></i></a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <a href="{% url 'encuesta:responde-pregunta' preg.id %}" class="btn btn-primary btn-sm">
+                                <i class="fas fa-spell-check"></i></a>
+                        </td>
+                        {% endif %}
+                        {% if request.user.username %}
+                        <td><a href="{% url 'encuesta:modifica-pregunta' preg.id %}" class="btn btn-warning btn-sm"><i
+                                    class="fas fa-edit"></i></a></td>
+                        <td><a href="{% url 'encuesta:resultado-pregunta' preg.id %}"
+                                class="btn btn-secondary btn-sm"><i class="fas fa-poll"></i></a></td>
+                        <td>
+                            <a href="#" onclick="modal_generic('{% url 'encuesta:borra-pregunta' preg.id %}')"
+                                class="btn btn-danger btn-sm" role="button" aria-pressed="true">
+                                <i class="fas fa-trash-alt"></i></a>
+                        </td>
+                        {% else %}
+
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
