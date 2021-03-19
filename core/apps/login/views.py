@@ -36,8 +36,8 @@ def loginPage(request):
                 request, username=username, password=password)
             if user is not None and user.is_active and user.check_password:
                 login(request, user)
-                messages.success(request, 'Bienvenido' +
-                                 username + '!')
+                messages.success(request, 'Bienvenido' + " " +
+                                 username.upper() + '!')
                 if 'next' in request.GET:
                     next_page = request.GET['next']
                     return redirect(next_page)
